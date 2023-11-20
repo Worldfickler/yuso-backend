@@ -6,8 +6,11 @@ import com.yupi.yuso.model.vo.PostVO;
 import com.yupi.yuso.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 帖子服务实现
@@ -28,7 +31,9 @@ public class PostDataSource implements DataSource<PostVO> {
         postQueryRequest.setSearchText(searchText);
         postQueryRequest.setCurrent(pageNum);
         postQueryRequest.setPageSize(pageSize);
-        Page<PostVO> postPage = postService.listPostVOByPage(postQueryRequest, null);
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = servletRequestAttributes.getRequest();
+        Page<PostVO> postPage = postService.listPostVOByPage(postQueryRequest, request);
         return postPage;
     }
 }
