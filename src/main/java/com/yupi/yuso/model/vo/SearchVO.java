@@ -22,7 +22,7 @@ public class SearchVO implements Serializable {
 
     private List<Picture> pictureList;
 
-    private Page<?> dataList;
+    private List<?> dataList;
 
     private static final long serialVersionUID = 1L;
 
