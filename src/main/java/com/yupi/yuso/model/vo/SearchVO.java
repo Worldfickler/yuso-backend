@@ -1,5 +1,6 @@
 package com.yupi.yuso.model.vo;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yupi.yuso.model.entity.Picture;
 import lombok.Data;
 
@@ -20,6 +21,8 @@ public class SearchVO implements Serializable {
     private List<PostVO> postList;
 
     private List<Picture> pictureList;
+
+    private Page<?> dataList;
 
     private static final long serialVersionUID = 1L;
 
