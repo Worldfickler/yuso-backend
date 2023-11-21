@@ -2,6 +2,7 @@ package com.yupi.yuso.datasource;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yupi.yuso.model.dto.post.PostQueryRequest;
+import com.yupi.yuso.model.entity.Post;
 import com.yupi.yuso.model.vo.PostVO;
 import com.yupi.yuso.service.PostService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,8 +34,8 @@ public class PostDataSource implements DataSource<PostVO> {
         postQueryRequest.setPageSize(pageSize);
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();
-        Page<PostVO> postPage = postService.listPostVOByPage(postQueryRequest, request);
-        return postPage;
+        Page<Post> postPage = postService.searchFromEs(postQueryRequest);
+        return postService.getPostVOPage(postPage, request);
     }
 }
 
